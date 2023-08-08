@@ -28,99 +28,106 @@
   sestatus
   ```
 2. **Making sure VT-x is enabled**
-   - Make sure your system has at least 16GB of RAM and a processor with VT support. Check the VT support using the below command.
 
-    ```bash
-    egrep --color 'vmx|svm' /proc/cpuinfo | wc -l
-    ```
+Make sure your system has at least 16GB of RAM and a processor with VT support. Check the VT support using the below command.
+
+ ```bash
+ egrep --color 'vmx|svm' /proc/cpuinfo | wc -l
+ ```
 
 output should be a value greater than 0.
 
 3. **Install the RDO repository**
-   - To begin, you need to setup RDO repositories for installing OpenStack on your system.
 
-    ```bash
-    yum install -y https://rdoproject.org/repos/rdo-release.rpm
-    ```
+To begin, you need to setup RDO repositories for installing OpenStack on your system.
+
+ ```bash
+ yum install -y https://rdoproject.org/repos/rdo-release.rpm
+ ```
 
 4. **Update the System:**
-   - Run the following command to update all installed packages.
 
-    ```bash
-    sudo yum update -y
-    ```
+Run the following command to update all installed packages.
+
+ ```bash
+ sudo yum update -y
+ ```
    
 5. **Reboot**
 
 6. **Disable NetworkManager and firewalld:**
-   - Run the following commands to disable NetworkManager and firewalld.
 
-    ```bash
-    systemctl disable firewalld
-    systemctl disable NetworkManager
-    systemctl stop firewalld
-    systemctl stop NetworkManager
-    systemctl enable network
-    systemctl start network
-    ```
+Run the following commands to disable NetworkManager and firewalld.
+
+```bash
+systemctl disable firewalld
+systemctl disable NetworkManager
+systemctl stop firewalld
+systemctl stop NetworkManager
+systemctl enable network
+systemctl start network
+```
 
 
 5. **Update the System Again:**
-   - Run the following command to update the system.
-   ```bash
-   sudo yum update -y
-   ```
+
+Run the following command to update the system.
+```bash
+sudo yum update -y
+```
 
 6. **Install Packstack Installer:**
-   - Run the following command to install the Packstack Installer.
-     ```bash
-     yum install -y openstack-packstack
-     ```
+
+Run the following command to install the Packstack Installer.
+ ```bash
+ yum install -y openstack-packstack
+    ```
 
 7. **Generate an Answer File:**
-   - Run the following command to generate an answer file.
-     ```bash
-     packstack --gen-answer-file=answer.txt
-     ```
+- Run the following command to generate an answer file.
+```bash
+packstack --gen-answer-file=answer.txt
+```
 
 8. **Edit the Answer File (Optional):**
-   - You can modify `answer.txt` using a text editor like vi or nano to customize your installation.
 
-    ```
-    vi answer.txt
-    ```
+You can modify `answer.txt` using a text editor like vi or nano to customize your installation.
 
-    Here, we will install the OpenStack without demo project. Also, we will create an OVS bridge called “br-ex” for external connectivity to instances (VM) through a logical segment called “extnet”.
+```
+vi answer.txt
+```
 
-    Make sure the physical interface (ens192) you mention in this file matches the network adapter available on your system.
+Here, we will install the OpenStack without demo project. Also, we will create an OVS bridge called “br-ex” for external connectivity to instances (VM) through a logical segment called “extnet”.
 
-    ```
-    # Skip the provision of Demo project
-    CONFIG_PROVISION_DEMO=n
-    # Change Admin Password - Used to Login to OpenStack Dashboard
-    CONFIG_KEYSTONE_ADMIN_PW=xxx
-    # Config OpenStack Dashboard over SSL
-    CONFIG_HORIZON_SSL=y
-    # Map physical network bridge to the logical name. <Logical Name:Bridge Name>
-    CONFIG_NEUTRON_OVS_BRIDGE_MAPPINGS=extnet:br-ex
-    # Create bridge for external connectivity. <Bridge Name: NW card name>
-    CONFIG_NEUTRON_OVS_BRIDGE_IFACES=br-ex:ens33
-    ```
-   
-    **extnet**: Logical name for our external physical connection.
 
-    **br-ex**: Bridge adapter
+Make sure the physical interface (ens192) you mention in this file matches the network adapter available on your system.
 
-    **eth0 or ens192**: Network Interface name
+```
+# Skip the provision of Demo project
+CONFIG_PROVISION_DEMO=n
+# Change Admin Password - Used to Login to OpenStack Dashboard
+CONFIG_KEYSTONE_ADMIN_PW=xxx
+# Config OpenStack Dashboard over SSL
+CONFIG_HORIZON_SSL=y
+# Map physical network bridge to the logical name. <Logical Name:Bridge Name>
+CONFIG_NEUTRON_OVS_BRIDGE_MAPPINGS=extnet:br-ex
+# Create bridge for external connectivity. <Bridge Name: NW card name>
+CONFIG_NEUTRON_OVS_BRIDGE_IFACES=br-ex:ens33
+```
+
+**extnet**: Logical name for our external physical connection.
+
+**br-ex**: Bridge adapter
+
+**eth0 or ens192**: Network Interface name
 
 9. **Install**
-   - Run the following command to begin the installation.
-     ```bash
-     packstack --answer-file=/root/answer.txt
-     ```
+- Run the following command to begin the installation.
+ ```bash
+ packstack --answer-file=/root/answer.txt
+ ```
      
 ![img.png](img.png)
-
 
 On completion, you should get a message something like this.
 
@@ -128,14 +135,14 @@ On completion, you should get a message something like this.
 
 
 9. **Access the OpenStack Dashboard:**
-   - Once the installation is completed, you will be provided with a URL to access the OpenStack dashboard.
-   - Now, to find the OpenStack Horizon dashboard password, run the following command:
-   
-   ```
-   cat keystonerc_admin | grep PASSWORD
-   ```
+- Once the installation is completed, you will be provided with a URL to access the OpenStack dashboard.
+- Now, to find the OpenStack Horizon dashboard password, run the following command:
 
-   You should see a screen like this:
+```
+cat keystonerc_admin | grep PASSWORD
+```
+
+You should see a screen like this:
 
 ![img_2.png](img_2.png)
 
