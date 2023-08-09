@@ -13,7 +13,7 @@
    - You need to have access to the environment variables to interact with your OpenStack deployment.
    - Source the RC file by running:
      ```bash
-     source admin-openrc.sh
+     source keystonerc_admin
      ```
 3. **Create the Flavor**:
 
