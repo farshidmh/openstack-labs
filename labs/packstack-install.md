@@ -7,6 +7,10 @@
 - Minimum 16GB of RAM
 - At least 50GB of free disk space
 - Internet access
+- Before you do anything, make sure to set the LANG and LC_ALL environment variables correctly with the following command:
+```
+echo -e "LANG=en_US.utf-8\nLC_ALL=en_US.utf-8\n" > /etc/environment
+```
 
 ### Step-by-step Instructions:
 
@@ -79,9 +83,9 @@ sudo yum update -y
 6. **Install Packstack Installer:**
 
 Run the following command to install the Packstack Installer.
- ```bash
+```bash
  yum install -y openstack-packstack
-    ```
+```
 
 7. **Generate an Answer File:**
 - Run the following command to generate an answer file.
@@ -105,14 +109,12 @@ Make sure the physical interface (ens192) you mention in this file matches the n
 ```
 # Skip the provision of Demo project
 CONFIG_PROVISION_DEMO=n
-# Change Admin Password - Used to Login to OpenStack Dashboard
-CONFIG_KEYSTONE_ADMIN_PW=xxx
 # Config OpenStack Dashboard over SSL
-CONFIG_HORIZON_SSL=y
+CONFIG_HORIZON_SSL=n
 # Map physical network bridge to the logical name. <Logical Name:Bridge Name>
 CONFIG_NEUTRON_OVS_BRIDGE_MAPPINGS=extnet:br-ex
 # Create bridge for external connectivity. <Bridge Name: NW card name>
-CONFIG_NEUTRON_OVS_BRIDGE_IFACES=br-ex:ens33
+CONFIG_NEUTRON_OVS_BRIDGE_IFACES=br-ex:ens192
 ```
 
 **extnet**: Logical name for our external physical connection.
