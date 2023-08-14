@@ -14,4 +14,6 @@ Labs instructions for Openstack training.
 - [Lab 6: Deleting a Flavor in OpenStack using UI](labs/flavor/delete_ui.md)
 - [Lab 7: Managing Flavor Access Control](labs/flavor/access.md)
 - [Lab 8: Access CLI in Ubuntu](labs/source_ubuntu.md)
-- 
+- [Lab 9: List Flavors](labs/flavor/list_flavors.md)
+- [Lab 10: List Images](labs/image/list_images.md)
+
