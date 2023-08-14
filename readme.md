@@ -16,4 +16,6 @@ Labs instructions for Openstack training.
 - [Lab 8: Access CLI in Ubuntu](labs/source_ubuntu.md)
 - [Lab 9: List Flavors](labs/flavor/list_flavors.md)
 - [Lab 10: List Images](labs/image/list_images.md)
+- 
+- [Lab 11: Create an Instance Using the OpenStack CLI](labs/instance/instance_cli.md)
 
