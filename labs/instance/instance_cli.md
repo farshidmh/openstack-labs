@@ -45,7 +45,7 @@ Assign the user to the project (tenant):
 
 ### Add an Image
 
-Follow [Convert Image](image/convert_image.md) to create crrios image.
+Follow [Convert Image](../image/convert_image.md) to create crrios image.
 
 __It should be called: `CirrOs 0.6.2-x86_64`__
 
