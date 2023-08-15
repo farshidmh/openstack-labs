@@ -59,7 +59,7 @@ openstack volume set --bootable ISO_Volume
 **Boot a new instance from the volume:**  
 You can now start a new instance using the bootable volume. This instance will retain the data from the volume, even after termination.
 ```bash
-openstack server create --flavor m1.small --boot-volume ISO_Volume --nic net-id=Your_Net_ID New_Instance_Name
+openstack server create --flavor m1.small --volume ISO_Volume --nic net-id=Your_Net_ID New_Instance_Name
 ```
 
 **Convert the volume to an image:**
