@@ -42,7 +42,7 @@ openstack server create --flavor m1.large --image IMAGE_NAME  --nic net-id=Your_
 **HINT**
 
 ```bash
-openstack server add volume MyInstance MyVolume
+openstack server add volume MyInstance ISO_Volume
 ```
 
 
