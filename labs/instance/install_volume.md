@@ -45,10 +45,19 @@ openstack server create --flavor m1.large --image IMAGE_NAME  --nic net-id=Your_
 openstack server add volume MyInstance ISO_Volume
 ```
 
-
 **Accessing the Instance:**
 - If your ISO is a live CD, you can access the system immediately.
 - If it's an installation ISO, use the instance console via Horizon or another method to continue the installation process. Make sure to install the OS onto the volume you've created.
+
+**After setup is complete:**
+
+- shut down the instance
+- detach the volume
+**HINT**
+```bash
+openstack server remove volume MyInstance ISO_Volume
+```
+
 
 **Make the volume bootable:**  
 After the OS installation onto the volume, mark the volume as bootable so it can be used for new instances.
