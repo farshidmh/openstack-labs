@@ -74,7 +74,7 @@ openstack server create --flavor m1.small --volume ISO_Volume --nic net-id=Your_
 **Convert the volume to an image:**
 If you want to use the volume as an image, you can convert it to an image using the following command:
 ```bash
-openstack image create --volume <volume_name> <your_image_name>
+openstack image create --disk-format qcow2  --volume <volume_name> <your_image_name>
 ```
 
 
