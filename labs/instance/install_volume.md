@@ -36,7 +36,14 @@ Using the uploaded ISO, start an instance. This instance behaves similarly to a 
 openstack server create --flavor m1.large --image IMAGE_NAME  --nic net-id=Your_Net_ID MyInstance
 ```
 **NOTE:** Do not forget to network the instance.
+
 **NOTE:** Do not forget to attach the volume to the instance.
+
+**HINT**
+
+```bash
+openstack server add volume MyInstance MyVolume
+```
 
 
 **Accessing the Instance:**
@@ -54,6 +61,13 @@ You can now start a new instance using the bootable volume. This instance will r
 ```bash
 openstack server create --flavor m1.small --boot-volume ISO_Volume --nic net-id=Your_Net_ID New_Instance_Name
 ```
+
+**Convert the volume to an image:**
+If you want to use the volume as an image, you can convert it to an image using the following command:
+```bash
+openstack volume upload --volume ISO_Volume --image-name New_Image_Name
+```
+
 
 ---
 
