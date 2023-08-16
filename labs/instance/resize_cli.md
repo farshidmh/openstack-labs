@@ -75,7 +75,6 @@ openstack server create --image MyImage --flavor FLAVOR_ID --nic net-id=MyNetwor
 Based on the following labs, replace `IMAGE_ID`, `FLAVOR_ID`, and `NETWORK_ID` with the appropriate IDs/names from your environment.
 - [List Images](../image/list_images.md)
 - [List Flavors](../flavor/list_flavors.md)
-- [List Networks](../network/list_networks.md)
 
 Wait for the instance to become ACTIVE before moving to the next step. You can check the instance status using openstack server list.
 
