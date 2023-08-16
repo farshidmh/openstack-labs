@@ -2,6 +2,11 @@
 
 Temporary URLs allow you to create time-limited URLs to access objects without authentication.
 
+### Time Estimate:
+
+You should be able to complete this lab in less than `15 minutes`.
+
+
 **Setting a Temporary URL Key**  
 Set a key for your account to generate and validate temporary URLs:
 
