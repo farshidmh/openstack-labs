@@ -24,7 +24,7 @@ To create a new volume, use the following command:
 ```bash
 openstack volume create --size INITIAL_SIZE VOLUME_NAME
 ```
-> **Example:** To create a 20GB volume named "MyNewVolume", the command would be:
+> **Example:** To create a 1GB volume named "MyNewVolume", the command would be:
 ```bash
 openstack volume create --size 1 MyNewVolume
 ```
@@ -48,7 +48,7 @@ Identify the volume's ID or name you want to resize from the list of volumes.
 ```bash
 openstack volume set --size NEW_SIZE VOLUME_ID_OR_NAME
 ```
-> **Example:** To resize the volume to 50GB, the command would be:
+> **Example:** To resize the volume to 5GB, the command would be:
 ```bash
 openstack volume set --size 5 MyNewVolume
 ```
