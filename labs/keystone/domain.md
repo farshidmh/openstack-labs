@@ -60,7 +60,7 @@ Explore the domain concept in OpenStack Keystone and learn how to create, manage
   Then, remove the `lab2domain`:
 
   ```bash
-  openstack domain set --delete lab2domain
+  openstack domain set --disable lab2domain
   openstack domain delete lab2domain
   ```
 
