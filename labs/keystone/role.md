@@ -69,7 +69,7 @@ Create an instance for the project from admin
 "get_network": "role:CustomRole",
 ```
 
-**Resource:** [Neutron Policy Reference](https://docs.openstack.org/neutron/latest/admin/config-policies.html)
+**Resource:** [Neutron Policy Reference](https://docs.openstack.org/neutron/latest/configuration/policy-sample.html)
 
 
 ### Step 6: Test Custom Role Permissions
