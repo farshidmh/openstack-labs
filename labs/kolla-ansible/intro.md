@@ -127,7 +127,7 @@ sudo pip3 install python-openstackclient
 **Initialize OpenStack Client Config**:
 After a successful deployment, source the OpenStack client environment file:
 ```bash
-. /etc/kolla/admin-openrc.sh
+source /etc/kolla/admin-openrc.sh
 ```
 
 **Post-Deployment**:
