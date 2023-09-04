@@ -1,4 +1,4 @@
-## **OpenStack Lab: Installing ISO into Volume and Booting from the Volume**
+# Installing ISO into Volume and Booting from the Volume**
 
 ### **Prerequisites:**
 - OpenStack environment up and running.
