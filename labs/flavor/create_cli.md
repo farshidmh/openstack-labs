@@ -1,41 +1,65 @@
 # Creating a Flavor Using the OpenStack CLI
 
-**Duration:** 30 minutes
-**Objective:** Learn how to create a flavor using the OpenStack CLI.
+## Duration
 
-### Step-by-Step Guide:
+Approximately 30 minutes
 
-1. **Access the Terminal**:
+## Objective
 
-   - Open a terminal window on the system where the OpenStack CLI is installed.
-2. **Source the OpenStack RC File**:
+Learn how to create a flavor using the OpenStack CLI.
 
-   - You need to have access to the environment variables to interact with your OpenStack deployment.
-   - Source the RC file by running:
-     ```bash
-     source keystonerc_admin
-     ```
-3. **Create the Flavor**:
+## Step-by-Step Guide:
 
-   - Run the following command to create a new flavor named "cli-flavor" with 1 vCPU, 1024 MB of RAM, and 10 GB of disk space:
-     ```bash
-     openstack flavor create --id auto --ram 1024 --disk 10 --vcpus 1 "cli-flavor"
-     ```
-4. **Verify the Creation**:
+### Step 1: Access the Terminal:
 
-   - Run the following command to view the list of flavors and confirm that "cli-flavor" is in the list:
-     ```bash
-     openstack flavor list
-     ```
-5. **(Optional) Explore Additional Options**:
+Follow [Access CLI](../access_rc_file.md) to access the openstack CLI.
 
-   - You can explore additional options for creating a flavor by running:
-     ```bash
-     openstack flavor create --help
-     ```
+### Step 2: Create the Flavor:
 
-### Summary:
+Run the following command to create a new flavor named "ubuntu-test-flavor" with 1 vCPU, 1024 MB of RAM, and 10 GB of
+disk
+space:
 
-In this lab, you've learned how to create a flavor using the OpenStack CLI. This method offers a programmatic way to create and manage flavors and can be especially useful in automating deployments and configurations.
+```bash
+openstack flavor create --id auto --ram 1024 --disk 10 --vcpus 1 "ubuntu-test-flavor"
+```
+
+### Step 3: Verify the Creation:
+
+Run the following command to view the list of flavors and confirm that "cli-flavor" is in the list:
+
+```bash
+openstack flavor list
+```
+
+result would be something like this:
+
+```bash
++------+--------------------+-------+------+-----------+-------+-----------+
+| ID   | Name               |   RAM | Disk | Ephemeral | VCPUs | Is Public |
++------+--------------------+-------+------+-----------+-------+-----------+
+| 1    | m1.tiny            |   512 |    1 |         0 |     1 | True      |
+| 2    | m1.small           |  2048 |   20 |         0 |     1 | True      |
+| 3    | m1.medium          |  4096 |   40 |         0 |     2 | True      |
+| 4    | m1.large           |  8192 |   80 |         0 |     4 | True      |
+| 5    | m1.xlarge          | 16384 |  160 |         0 |     8 | True      |
+| auto | ubuntu-test-flavor |  1024 |   10 |         0 |     1 | True      |
++------+--------------------+-------+------+-----------+-------+-----------+
+```
+
+**Remember:** List of flavors may vary depending on your OpenStack installation.
+
+### Bonus: Explore Additional Options:
+
+You can explore additional options for creating a flavor by running:
+
+```bash
+openstack flavor create --help
+```
+
+## Summary:
+
+In this lab, you've learned how to create a flavor using the OpenStack CLI. This method offers a programmatic way to
+create and manage flavors and can be especially useful in automating deployments and configurations.
 
 Feel free to practice creating additional flavors with different configurations using the CLI.
