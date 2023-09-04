@@ -21,7 +21,7 @@ disk
 space:
 
 ```bash
-openstack flavor create --id auto --ram 1024 --disk 10 --vcpus 1 "ubuntu-test-flavor"
+openstack flavor create --ram 1024 --disk 10 --vcpus 1 "ubuntu-test-flavor"
 ```
 
 ### Step 3: Verify the Creation:
