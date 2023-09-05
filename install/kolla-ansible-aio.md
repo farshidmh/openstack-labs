@@ -14,6 +14,47 @@ To understand and install OpenStack using Kolla-Ansible All-in-One (AIO) on Ubun
    will run all OpenStack services.
 2. **Operating System**: Ubuntu 22.04 LTS.
 
+## Your Environment
+
+You server must have two network interfaces both connected to the same network and same gateway.
+
+- **First interface**: This interface will be used for OpenStack services, It must have an IP address. We are going to
+  call it `INTERFACE_NAME` and its IP as `YOUR_IP`.
+- **Second interface**: This interface will be used for external network, It must not have an IP address. We are going
+  to call it `INTERFACE_NAME_NO_IP`.
+
+You could use the following command to get the name of the interfaces:
+
+```bash
+ip a
+```
+
+Result would be like:
+
+```bash
+pure@pure:~$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: ens3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether fa:16:3e:55:4b:bf brd ff:ff:ff:ff:ff:ff
+    altname enp0s3
+    inet xxx.xxx.xxx.xxx/24 metric 100 brd xxx.xxx.xxx.xxx scope global dynamic ens3
+       valid_lft 77405sec preferred_lft 77405sec
+    inet6 fe80::f816:3eff:fe55:4bbf/64 scope link
+       valid_lft forever preferred_lft forever
+4: ens7: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether fa:16:3e:30:2f:32 brd ff:ff:ff:ff:ff:ff
+    altname enp0s7
+    inet6 fe80::f816:3eff:fe30:2f32/64 scope link
+       valid_lft forever preferred_lft forever
+```
+
+In this case, `ens3` is the first interface with IP and `ens7` is the second interface without IP.
+
 ## Step-by-step guide:
 
 ### Install Dependencies
@@ -202,9 +243,9 @@ sdb                         8:16   0   1.7T  0 disk
 
 **Points to remember:**
 
-- In this result, we have two disks, `sda` and `sdb`. 
+- In this result, we have two disks, `sda` and `sdb`.
 - `sda` is the main disk, which is used for the OS,
-  and `sdb` is the disk that we are going to use for Cinder. 
+  and `sdb` is the disk that we are going to use for Cinder.
 
 
 - Openstack mounts the disk under the name of `vda` and `vdb`, so don't get confused.
