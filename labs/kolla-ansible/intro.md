@@ -382,7 +382,16 @@ kolla-ansible -i all-in-one deploy
 - This step might take a while, so be patient.
 - It's a nice idea to run this command directly from the server console or KVM, not from SSH.
 
+Result would be like:
 
+```bash
+PLAY RECAP ******************************************************************************************************************************************************************
+localhost                  : ok=382   changed=270    unreachable=0    failed=0    skipped=175   rescued=0    ignored=0
+```
+
+**NOTE:**
+- If you get any error, you can run the command again to fix it.
+- `ok` and `changed` values might be different for you, which is normal.
 
 
 
@@ -393,6 +402,21 @@ To initialize the OpenStack client environment file:
 ```bash
 kolla-ansible -i all-in-one post-deploy
 ```
+
+Result would be like:
+
+```bash
+PLAY RECAP ******************************************************************************************************************************************************************
+localhost                  : ok=5    changed=3    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+```
+
+**NOTE:**
+- If you get any error, you can run the command again to fix it.
+- `ok` and `changed` values might be different for you, which is normal.
+
+
+
+
 
 **Initialize OpenStack Client Config**:
 After a successful deployment, source the OpenStack client environment file:
@@ -405,7 +429,8 @@ source /etc/kolla/admin-openrc.sh
 After a successful deployment, source the OpenStack client environment file:
 
 ```bash
-./usr/local/share/kolla-ansible/init-runonce
+cd /usr/local/share/kolla-ansible/
+sudo ./init-runonce
 ```
 
 **Post-Deployment**:
