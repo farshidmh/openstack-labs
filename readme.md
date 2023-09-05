@@ -1,5 +1,7 @@
 # Openstack Labs
 
+![logo.png](logo.png)
+
 Labs instructions for Openstack training sessions.
 
 ## Introduction
