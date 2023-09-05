@@ -1,37 +1,35 @@
-# Install Kolla-Ansible All-in-One (AIO)
+### Prerequisites:
 
-## Prerequisites:
+1. **Servers**: At least two servers are recommended – one for the control plane and another for compute.
+2. **Operating System**: Ubuntu 22.04 LTS or CentOS 9.
+3. **SSH key-based authentication** between the deployment node (where you run Kolla-Ansible commands) and the target nodes.
+4. **Python**: Ensure Python is installed on all nodes.
 
-1. **Servers**: One server with at least 8GB of RAM and 4 CPU cores. This server will be managed by Kolla-Ansible and
-   will run all OpenStack services.
-2. **Operating System**: Ubuntu 22.04 LTS.
+### Step-by-step guide:
 
-## Step-by-step guide:
+**Install Dependencies**
 
-### Install Dependencies
+Kolla-Ansible relies on some Python libraries that are not available in the default Ubuntu repositories.
 
-Kolla-Ansible relies on some Python libraries that are not available in the default Ubuntu setup, so you need to install
-them.
-
-### Update Repositories
+**Update Repositories**:
 
 ```bash
 sudo apt-get update
 ```
 
-### Install Dependencies
+**Install Dependencies**:
 
 ```bash
 sudo apt install python3-dev libffi-dev gcc libssl-dev python3-pip git
 ```
 
-### Install Pip
+**Install Pip**:
 
 ```bash
 sudo pip3 install -U pip
 ```
 
-### Install Ansible
+**Install Ansible**:
 
 Kolla Ansible requires at least Ansible 6 and supports up to 7. Install Ansible using pip:
 
@@ -59,10 +57,9 @@ ansible [core 2.14.9]
   libyaml = True
 ```
 
-**Note:** Depending on the repositories that you use, `[core 2.14.9]` might be different for you, but since we have
-locked the version of ansible, it should be fine.
+**Note:** Depending on the repositories that you use, `[core 2.14.9]` might be different for you, but since we have locked the version of ansible, it should be fine.
 
-### Edit Ansible configuration file
+**Edit Ansible configuration file**:
 
 ```bash
 sudo mkdir /etc/ansible
@@ -82,22 +79,15 @@ Let's explain the above configuration:
 
 - `[defaults]`: This section header denotes default configurations for Ansible.
 
-- `host_key_checking=False`: By default, when Ansible connects to a new host for the first time, it prompts the user to
-  confirm the host's SSH fingerprint. Setting host_key_checking to False disables this verification, which can be
-  helpful for automated processes where manual intervention isn't
-  feasible. However, it's worth noting that this makes the connection less secure because it avoids checking for
-  potential man-in-the-middle attacks.
+- `host_key_checking=False`: By default, when Ansible connects to a new host for the first time, it prompts the user to confirm the host's SSH fingerprint. Setting host_key_checking to False disables this verification, which can be helpful for automated processes where manual intervention isn't
+  feasible. However, it's worth noting that this makes the connection less secure because it avoids checking for potential man-in-the-middle attacks.
 
-- `pipelining=True`: Pipelining reduces the number of SSH operations required to execute a module on the remote server,
-  resulting in a significant performance increase. This is particularly beneficial when the connection to the remote
-  server has high latency.
+- `pipelining=True`: Pipelining reduces the number of SSH operations required to execute a module on the remote server, resulting in a significant performance increase. This is particularly beneficial when the connection to the remote server has high latency.
 
-- `forks=100`: This determines how many parallel processes Ansible will use when executing commands on remote hosts. A
-  higher number can lead to faster execution when managing many hosts, but it also requires more resources on the
-  Ansible control node. In this case, it's set to run commands on up
+- `forks=100`: This determines how many parallel processes Ansible will use when executing commands on remote hosts. A higher number can lead to faster execution when managing many hosts, but it also requires more resources on the Ansible control node. In this case, it's set to run commands on up
   to 100 hosts simultaneously.
 
-### Clone Kolla-Ansible git repository
+**Clone Kolla-Ansible git repository**:
 
 On this guide, we are going to use the latest version of Kolla-Ansible, which is `master` branch.
 
@@ -119,29 +109,26 @@ Result would be like:
 
 **Note:** 16.1.0 is the latest version of Kolla-Ansible at the time of writing this guide.
 
-### Copy Global Configuration Files
+**Copy Global Configuration**:
 
-kolla-ansible default configuration is a bare minimum configuration, which is not suitable for production
-environments. So, we are going to use the example configuration files to configure our environment.
+By default, kolla-asnible will look for the configuration files in `/etc/kolla` directory. So, we need to copy the configuration files to that directory.
 
-Kolla-Ansible will look for the configuration files in `/etc/kolla` directory. So, we need to copy the
-configuration files to that directory.
+**Note:** kolla-ansible default configuration is a bare minimum configuration, which is not suitable for production environments. So, we are going to use the example configuration files to configure our environment.
 
 ```bash
 sudo mkdir -p /etc/kolla
 sudo cp -r /usr/local/share/kolla-ansible/etc_examples/kolla/* /etc/kolla/
 ```
 
-### Chang owner of the kolla directory to the current user
+**Chang owner of the kolla directory to the current user**
 
-Kolla-Ansible requires that the user running the deployment commands owns the `/etc/kolla` directory. To change the
-owner of the directory to the current user, run:
+Kolla-Ansible requires that the user running the deployment commands owns the `/etc/kolla` directory. To change the owner of the directory to the current user, run:
 
 ```bash
 sudo chown -R $USER:$USER /etc/kolla
 ```
 
-### Storage backend configuration
+**Storage backend configuration**
 
 When considering an all-in-one configuration, you have two available choices.
 
@@ -162,16 +149,13 @@ When considering an all-in-one configuration, you have two available choices.
 
 Both options provide ways to set up an all-in-one configuration, each with its benefits and use cases.
 
-We're going to use the first option, which is **LVM on Distinct Disks**.
-
-### Cinder LVM configuration
+**Option A - Cinder LVM configuration**
 
 We are going to use LVM as the backend for Cinder. So, we need to create a new volume group for Cinder.
 
-#### Step A: Identify the disk that you want to use for Cinder.
+_Step A_ Identify the disk that you want to use for Cinder.
 
-List all available block devices (like hard drives, SSDs, and their partitions) on the system. This command provides a
-structured view which helps in identifying devices by their names, sizes, and mount points.
+List all available block devices (like hard drives, SSDs, and their partitions) on the system. This command provides a structured view which helps in identifying devices by their names, sizes, and mount points.
 
 ```bash
 lsblk
@@ -192,16 +176,11 @@ sda                         8:0    0   931G  0 disk
 sdb                         8:16   0   1.7T  0 disk
 ```
 
-**Points to remember:**
+**NOTE:** In this example, we have two disks, `sda` and `sdb`. `sda` is the main disk, which is used for the OS, and `sdb` is the disk that we are going to use for Cinder. You must identify the disk that you want to use for Cinder.
 
-- In this result, we have two disks, `sda` and `sdb`. `sda` is the main disk, which is used for the OS,
-  and `sdb` is the disk that we are going to use for Cinder. You must identify the disk that you want to use for Cinder.
+**NOTE:** If you have more than one disk, you need to identify the disk that you want to use for Cinder.
 
-- Openstack mounts the disk under the name of `vda` and `vdb`, so don't get confused.
-
-**Nice to know:** `sda` or `sdb` stands for SCSI disk A or B.
-
-#### Step B: Create a new physical volumes group for Cinder
+### Step B - Create a new physical volumes group for Cinder.
 
 **NOTE:** Replace `/dev/sdb` with the disk that you want to use for Cinder.
 
@@ -231,7 +210,7 @@ You would see something like the following:
 
 **NOTE:** The values that you would see depends on your system configuration.
 
-#### Step C: Create a new volume group for Cinder.
+### Step C - Create a new volume group for Cinder.
 
 Create a new volume group named `cinder-volumes` to be used by Cinder:
 
@@ -255,6 +234,7 @@ sudo vgs
 
 result would like the following:
 
+
 **NOTE:** The values that you would see depends on your system configuration.
 
 ```bash
@@ -263,9 +243,10 @@ result would like the following:
   ubuntu-vg        1   1   0 wz--n- <927.95g 968.00m
 ```
 
-## Back to Kolla-Ansible
 
-### Edit globals.yml file
+
+
+**Edit `globals.yml`**:
 Open `/etc/kolla/globals.yml` in your favorite editor and make the following changes:
 
 ```bash
@@ -287,8 +268,7 @@ enable_horizon_ceilometer: "yes"
 
 **Configure Passwords**:
 
-Kolla-Ansible requires passwords for various services. You can generate these passwords using the `kolla-genpwd`
-command:
+Kolla-Ansible requires passwords for various services. You can generate these passwords using the `kolla-genpwd` command:
 
 ```bash
 kolla-genpwd
@@ -302,6 +282,7 @@ WARNING: Passwords file "/etc/kolla/passwords.yml" is world-readable. The permis
 
 You can ignore it.
 
+
 Verify that the passwords were generated successfully by running:
 
 ```bash
@@ -311,6 +292,7 @@ cat /etc/kolla/passwords.yml
 This will print the generated passwords to the terminal.
 
 _It's a good idea to save these passwords in a secure location for future reference._
+
 
 **Setup Ansible Inventory**:
 Copy the inventory file:
@@ -340,14 +322,11 @@ sudo pip3 install python-openstackclient
 **Bootstrap Servers**:
 This step will configure the servers with required packages and configuration:
 
-**NOTE:** we're using `all-in-one` inventory file, you can use `multinode` if you want to deploy OpenStack on multiple
-servers.
+**NOTE:** we're using `all-in-one` inventory file, you can use `multinode` if you want to deploy OpenStack on multiple servers.
 
-You might get a permission error, which is normal. Run any command with `sudo` then run the command again
-without `sudo`.
+You might get a permission error, which is normal. Run any command  with `sudo` then run the command again without `sudo`.
 
 For example run the following command and exit the editor:
-
 ```bash
 sudo nano a.txt
 ```
@@ -367,8 +346,7 @@ localhost                  : ok=32   changed=12   unreachable=0    failed=0    s
 
 As long as you see `failed=0`, you are good to go.
 
-**NOTE:**
-
+**NOTE:** 
 - If you get any error, you can run the command again to fix it.
 - `ok` and `changed` values might be different for you, which is normal.
 
@@ -388,9 +366,9 @@ localhost                  : ok=92   changed=0    unreachable=0    failed=0    s
 ```
 
 **NOTE:**
-
 - If you get any error, you can run the command again to fix it.
 - `ok` and `changed` values might be different for you, which is normal.
+
 
 **Deploy OpenStack**:
 
@@ -400,8 +378,7 @@ To deploy OpenStack, run:
 kolla-ansible -i all-in-one deploy
 ```
 
-**NOTEs:**
-
+**NOTEs:** 
 - This step might take a while, so be patient.
 - It's a nice idea to run this command directly from the server console or KVM, not from SSH.
 
@@ -413,9 +390,10 @@ localhost                  : ok=382   changed=270    unreachable=0    failed=0  
 ```
 
 **NOTE:**
-
 - If you get any error, you can run the command again to fix it.
 - `ok` and `changed` values might be different for you, which is normal.
+
+
 
 **Post Deploy OpenStack**:
 
@@ -433,9 +411,12 @@ localhost                  : ok=5    changed=3    unreachable=0    failed=0    s
 ```
 
 **NOTE:**
-
 - If you get any error, you can run the command again to fix it.
 - `ok` and `changed` values might be different for you, which is normal.
+
+
+
+
 
 **Initialize OpenStack Client Config**:
 After a successful deployment, source the OpenStack client environment file:
@@ -479,11 +460,8 @@ openstack network list
 
 ### Tips:
 
-- If this is your first time deploying OpenStack, or if you're deploying in a non-production environment, consider
-  deploying an "all-in-one" configuration first.
-- Before deploying, ensure your servers meet the minimum hardware and software requirements for the roles they'll
-  fulfill in your OpenStack environment.
+- If this is your first time deploying OpenStack, or if you're deploying in a non-production environment, consider deploying an "all-in-one" configuration first.
+- Before deploying, ensure your servers meet the minimum hardware and software requirements for the roles they'll fulfill in your OpenStack environment.
 - Ensure your environment's DNS and NTP are configured correctly. OpenStack components are sensitive to time drifts.
 
-Remember, deploying OpenStack can be complex, so it's important to review Kolla-Ansible's official documentation, any
-error messages, and logs carefully if you encounter issues.
+Remember, deploying OpenStack can be complex, so it's important to review Kolla-Ansible's official documentation, any error messages, and logs carefully if you encounter issues.
