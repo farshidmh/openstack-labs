@@ -1,5 +1,13 @@
 # Install Kolla-Ansible All-in-One (AIO)
 
+## Duration
+
+Approximately 2 hours
+
+## Objective
+
+To understand and install OpenStack using Kolla-Ansible All-in-One (AIO) on Ubuntu 22.04.
+
 ## Prerequisites:
 
 1. **Servers**: One server with at least 8GB of RAM and 4 CPU cores. This server will be managed by Kolla-Ansible and
@@ -266,7 +274,16 @@ result would like the following:
 ## Back to Kolla-Ansible
 
 ### Edit globals.yml file
+
 Open `/etc/kolla/globals.yml` in your favorite editor and make the following changes:
+
+DO not use `sudo` here since we have changed the owner of the `/etc/kolla` directory to the current user.
+
+```bash
+nano /etc/kolla/globals.yml
+```
+
+**Update the following values**
 
 ```bash
 kolla_base_distro: "ubuntu"
@@ -282,10 +299,9 @@ enable_aodh: "yes"
 enable_ceilometer: "yes"
 enable_gnocchi: "yes"
 gnocchi_api_public_port: 8041
-enable_horizon_ceilometer: "yes"
 ```
 
-**Configure Passwords**:
+### Configure Passwords
 
 Kolla-Ansible requires passwords for various services. You can generate these passwords using the `kolla-genpwd`
 command:
@@ -312,7 +328,8 @@ This will print the generated passwords to the terminal.
 
 _It's a good idea to save these passwords in a secure location for future reference._
 
-**Setup Ansible Inventory**:
+### Setup Ansible Inventory
+
 Copy the inventory file:
 
 ```bash
@@ -320,30 +337,41 @@ cd ~
 cp /usr/local/share/kolla-ansible/ansible/inventory/* .
 ```
 
-Edit the `all-in-one` or `multinode` inventory file based on your setup.
+**Nice to know:** The inventory file is a file that contains the list of servers that Kolla-Ansible will manage.
 
 - **All-in-one**: A single node deployment that runs all OpenStack services on a single server.
 - **Multinode**: A multi-node deployment that runs OpenStack services on multiple servers.
 
-**Install Ansible Galaxy requirements**
+We are trying to deploy OpenStack on a single server, so we are going to use the `all-in-one` inventory file and we
+don't need to change anything.
+
+### Install Ansible Galaxy requirements
+
+Install Ansible Galaxy requirements:
 
 ```bash
 kolla-ansible install-deps
 ```
 
-**install openstack CLI client**
+### Install openstack CLI client
+
+Install the OpenStack CLI client:
 
 ```bash
 sudo pip3 install python-openstackclient
 ```
 
-**Bootstrap Servers**:
+### Notes about Ansible
+
+- If you get any error, you can run the command again to fix it.
+- `ok` and `changed` values might be different for you, which is normal.
+- As long as you see `failed=0`, you are good to go.
+
+### Bootstrap Servers
+
 This step will configure the servers with required packages and configuration:
 
-**NOTE:** we're using `all-in-one` inventory file, you can use `multinode` if you want to deploy OpenStack on multiple
-servers.
-
-You might get a permission error, which is normal. Run any command with `sudo` then run the command again
+**NOTE:** You might get a permission error, which is normal. Run any command with `sudo` then run the command again
 without `sudo`.
 
 For example run the following command and exit the editor:
@@ -365,16 +393,9 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=32   changed=12   unreachable=0    failed=0    skipped=23   rescued=0    ignored=0
 ```
 
-As long as you see `failed=0`, you are good to go.
+### Prechecks
 
-**NOTE:**
-
-- If you get any error, you can run the command again to fix it.
-- `ok` and `changed` values might be different for you, which is normal.
-
-**Prechecks**:
-
-Run the prechecks to ensure your environment is ready for deployment:
+Run the `prechecks` to ensure your environment is ready for deployment:
 
 ```bash
 kolla-ansible -i all-in-one prechecks
@@ -387,23 +408,16 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=92   changed=0    unreachable=0    failed=0    skipped=65   rescued=0    ignored=0
 ```
 
-**NOTE:**
+### Deploy OpenStack
 
-- If you get any error, you can run the command again to fix it.
-- `ok` and `changed` values might be different for you, which is normal.
-
-**Deploy OpenStack**:
+This step might take a while, so be patient, and It's a nice idea to run this command directly from the server console
+or KVM, not from SSH.
 
 To deploy OpenStack, run:
 
 ```bash
 kolla-ansible -i all-in-one deploy
 ```
-
-**NOTEs:**
-
-- This step might take a while, so be patient.
-- It's a nice idea to run this command directly from the server console or KVM, not from SSH.
 
 Result would be like:
 
@@ -412,12 +426,7 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=382   changed=270    unreachable=0    failed=0    skipped=175   rescued=0    ignored=0
 ```
 
-**NOTE:**
-
-- If you get any error, you can run the command again to fix it.
-- `ok` and `changed` values might be different for you, which is normal.
-
-**Post Deploy OpenStack**:
+### Post Deploy OpenStack
 
 To initialize the OpenStack client environment file:
 
@@ -432,33 +441,31 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=5    changed=3    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
 ```
 
-**NOTE:**
+### Initialize OpenStack Client Config
 
-- If you get any error, you can run the command again to fix it.
-- `ok` and `changed` values might be different for you, which is normal.
-
-**Initialize OpenStack Client Config**:
 After a successful deployment, source the OpenStack client environment file:
 
 ```bash
 source /etc/kolla/admin-openrc.sh
 ```
 
-**Initialize OpenStack Client Config**:
-After a successful deployment, source the OpenStack client environment file:
+### Initialize OpenStack Client Config
+
+use kolla to initialize the openstack environment:
 
 ```bash
 cd /usr/local/share/kolla-ansible/
 sudo ./init-runonce
 ```
 
-**Post-Deployment**:
+### Post-Deployment
 
 - Create the public and private networks.
 - Launch instances and configure security groups.
 - Configure any additional services or components as needed.
 
-**Validate Deployment**:
+### Validate Deployment
+
 Check that all containers are up:
 
 ```bash
@@ -472,10 +479,10 @@ openstack image list
 openstack network list
 ```
 
-### Troubleshooting:
+## Troubleshooting:
 
 - If a deployment fails, you can use `kolla-ansible -i ./all-in-one reconfigure` to attempt to correct it.
-- Logs for Kolla-Ansible are typically found in `/var/log/kolla/`.
+- Logs for Kolla-Ansible are typically found in `/var/log/kolla/` but you must access them with `root` user.
 
 ### Tips:
 
