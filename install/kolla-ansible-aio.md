@@ -23,6 +23,8 @@ You server must have two network interfaces both connected to the same network a
 - **Second interface**: This interface will be used for external network, It must not have an IP address. We are going
   to call it `INTERFACE_NAME_NO_IP`.
 
+**NOTE:** In production environments, you should use two different networks for OpenStack services and external.
+
 You could use the following command to get the name of the interfaces:
 
 ```bash
