@@ -202,7 +202,8 @@ sdb                         8:16   0   1.7T  0 disk
 
 **Points to remember:**
 
-- In this result, we have two disks, `sda` and `sdb`. `sda` is the main disk, which is used for the OS,
+- In this result, we have two disks, `sda` and `sdb`. 
+- `sda` is the main disk, which is used for the OS,
   and `sdb` is the disk that we are going to use for Cinder. You must identify the disk that you want to use for Cinder.
 
 - Openstack mounts the disk under the name of `vda` and `vdb`, so don't get confused.
