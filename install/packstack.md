@@ -129,11 +129,11 @@ CONFIG_NEUTRON_OVS_BRIDGE_IFACES=br-ex:ens192
  packstack --answer-file=/root/answer.txt
  ```
      
-![img.png](img.png)
+![img.png](../labs/img.png)
 
 On completion, you should get a message something like this.
 
-![img_1.png](img_1.png)
+![img_1.png](../labs/img_1.png)
 
 
 9. **Access the OpenStack Dashboard:**
@@ -146,7 +146,7 @@ cat keystonerc_admin | grep PASSWORD
 
 You should see a screen like this:
 
-![img_2.png](img_2.png)
+![img_2.png](../labs/img_2.png)
 
 
 #### Verification:

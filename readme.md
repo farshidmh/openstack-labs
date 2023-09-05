@@ -8,10 +8,6 @@ Labs instructions for Openstack training sessions.
 
 This repository contains the labs for the Openstack training sessions. The labs are divided into two sections:
 
-- CLI Based Labs
-- GUI Based Labs
-- Setup Labs
-
 ## Labs Structure
 
 Each lab is a markdown file that contains the following sections:
@@ -27,14 +23,12 @@ Each lab is a markdown file that contains the following sections:
 - Access to the OpenStack CLI
 - Openstack installed on Ubuntu 22.04
 
-- wget
-    - Note: If you don't have wget installed, you can install it with  `apt install wget -y`
-
 ## Labs
 
-### Setup Labs
+### 1. Installation
 
-- [Lab 1: Installing Openstack using Packstack](labs/packstack-install.md)
+- 1.1 - [Installing Openstack using Packstack](install/packstack.md) (Centos, educational purpose)
+- 1.2 - [Installing Openstack using Kolla-Ansible - All-in-One](install/kolla-ansible-aio.md) (Ubuntu, production purpose)
 
 ### CLI Based Labs
 
