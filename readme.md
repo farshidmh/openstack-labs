@@ -36,6 +36,7 @@ Each lab is a markdown file that contains the following sections:
 - 2.1 [Create Ubuntu Image using CLI](image/cli.md)
 - 2.2 [Create Flavor using CLI](flavor/cli.md)
 - 2.3 [Create Flavor using Horizon](flavor/horizon.md)
+- 2.4 [Limit flavor access to a specific project](flavor/access.md)
 
 
 ### 3. Heat
