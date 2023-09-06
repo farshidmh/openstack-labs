@@ -45,6 +45,7 @@ Each lab is a markdown file that contains the following sections:
 - 3.2 [Create a Heat Stack with Network using CLI](heat/network_instance.md)
 - 3.3 [Create a Heat Stack with Parameters using CLI](heat/template_parameter.md)
 - 3.4 [Create a Heat Stack by reusing another template](heat/nested.md)
+- 3.5 [Create a Heat Stack with advanced networking](heat/advance_networking.md)
 
 
 
