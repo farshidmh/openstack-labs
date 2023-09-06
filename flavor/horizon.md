@@ -46,7 +46,11 @@ Click on `Create Flavor`.
 
 ### Step 5: Verify the Flavor Creation*:
 
-    - Confirm that the new flavor appears in the flavors list with the details you've specified.
+Confirm that the new flavor appears in the flavors list with the details you've specified.
+
+### Step 6: Delete the Flavor (Optional):
+
+Click on the `Delete Flavor` button next to the flavor you want to delete.
 
 ## Summary:
 

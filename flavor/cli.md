@@ -49,6 +49,14 @@ result would be something like this:
 
 **Remember:** List of flavors may vary depending on your OpenStack installation.
 
+### Step 4: Delete the Flavor (Optional):
+
+To delete the flavor, run the following command:
+
+```bash
+openstack flavor delete "ubuntu-test-flavor"
+```
+
 ### Bonus: Explore Additional Options:
 
 You can explore additional options for creating a flavor by running:
