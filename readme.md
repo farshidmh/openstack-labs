@@ -43,18 +43,19 @@ Each lab is a markdown file that contains the following sections:
 - 2.8 [Create a Router using CLI](network/router.md)
 - 2.9 [Create a Volume using CLI](volume/cli.md)
 
+### 3. Keystone
 
+- 3.1 [Create a User in CLI](keystone/user.md)
 
-### 3. Heat
+### 4. Heat
 
-- 3.1 [Create a Heat Stack using CLI](heat/simple_template.md)
-- 3.2 [Create a Heat Stack with Network using CLI](heat/network_instance.md)
-- 3.3 [Create a Heat Stack with Parameters using CLI](heat/template_parameter.md)
-- 3.4 [Create a Heat Stack by reusing another template](heat/nested.md)
-- 3.5 [Create a Heat Stack with advanced networking](heat/advance_networking.md)
-
-
+- 4.1 [Create a Heat Stack using CLI](heat/simple_template.md)
+- 4.2 [Create a Heat Stack with Network using CLI](heat/network_instance.md)
+- 4.3 [Create a Heat Stack with Parameters using CLI](heat/template_parameter.md)
+- 4.4 [Create a Heat Stack by reusing another template](heat/nested.md)
+- 4.5 [Create a Heat Stack with advanced networking](heat/advance_networking.md)
 
 ### Extras
+
 - [How to setup LVM on Ubuntu 22.04 for Cinder](extra/ubuntu-lvm.md)
 - [How to setup Ansible on Ubuntu 22.04 for Kolla-Ansible](extra/ubuntu-ansible.md)
