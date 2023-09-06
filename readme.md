@@ -36,3 +36,4 @@ Each lab is a markdown file that contains the following sections:
 
 ### Extras
 - [How to setup LVM on Ubuntu 22.04 for Cinder](extra/ubuntu-lvm.md)
+- [How to setup Ansible on Ubuntu 22.04 for Kolla-Ansible](extra/ubuntu-ansible.md)
