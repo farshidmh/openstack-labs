@@ -13,6 +13,8 @@ To understand and install OpenStack using Kolla-Ansible All-in-One (AIO) on Ubun
 1. **Servers**: One server with at least 8GB of RAM and 4 CPU cores. This server will be managed by Kolla-Ansible and
    will run all OpenStack services.
 2. **Operating System**: Ubuntu 22.04 LTS.
+3. **Disk**: One disk with at least 50GB of free space for OS and one disk with at least 100GB of free space for Cinder.
+4. **Network**: Two network interfaces connected to the same network and same gateway.(Second interface must not have an IP address/Valid IP address)
 
 ## Your Environment
 
