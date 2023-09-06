@@ -392,6 +392,11 @@ openstack network list
 
 Interact with your openstack environment using the Horizon dashboard or RC file.
 
+### Step R: Access Horizon Dashboard
+
+Configure the public network's subnet based on the network interface you have used for the public network.
+
+
 ## Troubleshooting:
 
 - If a deployment fails, you can use `kolla-ansible -i ./all-in-one reconfigure` to attempt to correct it.
