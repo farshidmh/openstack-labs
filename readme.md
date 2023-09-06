@@ -27,8 +27,9 @@ Each lab is a markdown file that contains the following sections:
 
 ### 1. Installation
 
-- 1.1 - [Installing Openstack using Packstack](install/packstack.md) (Centos, educational purpose)
-- 1.2 - [Installing Openstack using Kolla-Ansible - All-in-One](install/kolla-ansible-aio.md) (Ubuntu, production purpose)
+- 1.1 - [Installing Openstack using Packstack](install/packstack.md) (Centos, Educational)
+- 1.2 - [Installing Openstack using Kolla-Ansible - All-in-One](install/kolla-ansible-aio.md) (Ubuntu, Educational)
+- 1.3 - [Installing Openstack using Kolla-Ansible - Multi Node](install/kolla-ansible-multinode.md) (Ubuntu, Production)
 
 
 
