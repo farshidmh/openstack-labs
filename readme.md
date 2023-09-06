@@ -31,7 +31,9 @@ Each lab is a markdown file that contains the following sections:
 - 1.2 - [Installing Openstack using Kolla-Ansible - All-in-One](install/kolla-ansible-aio.md) (Ubuntu, Educational)
 - 1.3 - [Installing Openstack using Kolla-Ansible - Multi Node](install/kolla-ansible-multinode.md) (Ubuntu, Production)
 
+### 2. Using Openstack
 
+- 2.1 [Create Ubuntu Image using CLI](image/cli.md)
 
 
 
