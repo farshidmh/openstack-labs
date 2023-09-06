@@ -15,7 +15,7 @@ To understand and install OpenStack using Kolla-Ansible in a production environm
 1. **Servers**:
     - Storage node: 1 server with at least 2 disks (50GB, 100GB Cinder) / 1 Valid IP, 1 raw NIC.
     - Controller node: 2 server with 1 disk (50GB) and deployment / 1 Valid IP, 1 raw NIC. (To demonstrate, HA, we are going to use 2 servers, but in production environments, you should use 3 servers)
-    - Compute node: 2 server with 1 disk (50GB), 10 CPU, 10GB ram / 1 Valid IP, 1 raw NIC.
+    - Compute node: 1 server with 1 disk (50GB), 10 CPU, 10GB ram / 1 Valid IP, 1 raw NIC.
     - Network node: 1 server with 1 disk (50GB) / 1 Valid IP, 1 raw NIC.
 2. **Operating System**: Ubuntu 22.04 LTS.
 
