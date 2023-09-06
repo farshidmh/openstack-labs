@@ -34,9 +34,12 @@ Each lab is a markdown file that contains the following sections:
 ### 2. Using Openstack
 
 - 2.1 [Create Ubuntu Image using CLI](image/cli.md)
-- 2.2 [Create Flavor using CLI](flavor/cli.md)
-- 2.3 [Create Flavor using Horizon](flavor/horizon.md)
-- 2.4 [Limit flavor access to a specific project](flavor/access.md)
+- 2.2 [Create Cirros using CLI](flavor/cli.md)
+- 2.3 [Create Flavor using CLI](flavor/cli.md)
+- 2.4 [Create Flavor using Horizon](flavor/horizon.md)
+- 2.5 [Limit flavor access to a specific project](flavor/access.md)
+- 2.6 [Create a Network using CLI](network/cli.md)
+- 2.7 [Create a Volume using CLI](volume/cli.md)
 
 
 ### 3. Heat

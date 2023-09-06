@@ -17,7 +17,7 @@ You should be able to complete this lab in less than `30 minutes`.
 
 ## Steps:
 
-### Download img file
+### Step 1: Download img file
 
 Download cirros `.img` file using `wget`
 
@@ -37,12 +37,11 @@ result:
 cirros-0.6.2-x86_64-disk.img
 ```
 
-### Convert img to qcow2
+### Step 2: Convert img to qcow2
 
 The `qemu-img` convert command can do conversion between multiple formats, including `qcow2`, `qed`, `raw`, `vdi`, `vhd`, and `vmdk`.
 
 **Note:** `ISO` files are not supported by `qemu-img` since it is a snapshot of a `DVD`.
-
 
 ```bash
 cd /home/pure
@@ -62,12 +61,11 @@ Result:
 cirros-0.6.2-x86_64-disk.raw
 ```
 
-
-### Source the OpenRC File
+### Step 3: Source the OpenRC File
 
 Follow `labs/source_ubuntu.md` to source the `openrc` file.
 
-### Crate an Image
+### Step 4: Crate an Image
 
 After sourcing the `openrc` file, you can create an image using the `openstack image create` command.
 
@@ -80,7 +78,6 @@ openstack image create --public --protected --disk-format raw --file cirros-0.6.
 - `--disk-format`: Specifies the disk format (e.g., "qcow2", "raw").
 - `"CirrOs 0.6.2-x86_64"`: The name of the image.
 - `--file`: The path to the image file.
-
 
 ## Conclusion:
 
