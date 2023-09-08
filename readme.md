@@ -55,6 +55,10 @@ Each lab is a markdown file that contains the following sections:
 - 4.4 [Create a Heat Stack by reusing another template](heat/nested.md)
 - 4.5 [Create a Heat Stack with advanced networking](heat/advance_networking.md)
 
+### 5. Packer
+
+- 5.1 [Create an OpenStack Image using Packer on Ubuntu](packer/packer.md)
+
 ### Extras
 
 - [How to setup LVM on Ubuntu 22.04 for Cinder](extra/ubuntu-lvm.md)
